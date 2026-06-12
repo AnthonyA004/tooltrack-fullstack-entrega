@@ -5,8 +5,8 @@ WORKDIR /app
 # Copiar archivos de dependencias
 COPY package*.json ./
 
-# Instalar dependencias de Node de forma limpia
-RUN npm install
+# Instalar dependencias de Node (asegurando devDependencies para vite)
+RUN npm install --include=dev
 
 # Copiar el resto del código y compilar la app de producción
 COPY . .
