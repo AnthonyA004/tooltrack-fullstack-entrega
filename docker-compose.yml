@@ -6,15 +6,17 @@ services:
       context: ./frontend-app
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "3000:80" # Cambiamos a 3000 para que coincida con tu puerto de entrega de Tailscale
     depends_on:
       - backend
 
   backend:
-    build:
-      context: ./herramientas-node-api
-      dockerfile: Dockerfile # O la configuración de docker que maneje su API
+    image: node:18-alpine # Usamos una imagen oficial directa para no necesitar un Dockerfile interno
+    working_dir: /app
+    volumes:
+      - ./herramientas-node-api:/app
+    command: sh -c "npm install && npm start" # Instala dependencias y arranca la API automáticamente
     environment:
       - DB_PASSWORD=${DB_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
-    # No exponemos el puerto del backend al público, se queda interno
+    # Se mantiene interno dentro de la red de Docker sin exponerse directamente

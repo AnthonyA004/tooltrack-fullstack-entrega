@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ToolTrack Admin - Operations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#ebf1ff",
+                    "inverse-surface": "#233144",
+                    "on-tertiary-container": "#ffa583",
+                    "on-error": "#ffffff",
+                    "primary-container": "#1e40af",
+                    "background": "#f8f9ff",
+                    "outline-variant": "#c4c5d5",
+                    "surface-container-highest": "#d5e3fd",
+                    "surface-dim": "#ccdbf4",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#006f66",
+                    "primary-fixed": "#dde1ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#00288e",
+                    "on-background": "#0d1c2f",
+                    "secondary-fixed": "#89f5e7",
+                    "on-primary-fixed-variant": "#173bab",
+                    "secondary": "#006a61",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f8f9ff",
+                    "tertiary-container": "#872d00",
+                    "surface-container": "#e6eeff",
+                    "secondary-container": "#86f2e4",
+                    "inverse-primary": "#b8c4ff",
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-tertiary-fixed": "#380d00",
+                    "on-surface-variant": "#444653",
+                    "outline": "#757684",
+                    "on-primary-container": "#a8b8ff",
+                    "primary-fixed-dim": "#b8c4ff",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "surface-bright": "#f8f9ff",
+                    "tertiary": "#611e00",
+                    "on-surface": "#0d1c2f",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#00201d",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#3755c3",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container-high": "#dde9ff",
+                    "tertiary-fixed": "#ffdbce",
+                    "tertiary-fixed-dim": "#ffb59a",
+                    "on-tertiary-fixed-variant": "#802a00",
+                    "surface-variant": "#d5e3fd",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#001453"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "2xl": "48px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "gutter": "20px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "margin": "24px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-md": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["10px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8f9ff;
+            color: #0d1c2f;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .technical-border {
+            border: 1px solid #c4c5d5;
+        }
+        .status-ready { border-top: 2px solid #006a61; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-body-md pb-20 md:pb-0 md:pl-64">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 right-0 left-0 md:left-64 z-50 bg-surface border-b border-outline-variant">
+<div class="flex justify-between items-center px-margin py-md max-w-7xl mx-auto h-16">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" style="font-size: 28px;">construction</span>
+<h1 class="font-headline-md text-headline-md text-primary font-bold tracking-tight">ToolTrack</h1>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-medium hover:opacity-80 transition-opacity">
+                Get Started
+            </button>
+</div>
+</header>
+<!-- Sidebar Navigation (Desktop) -->
+<aside class="hidden md:flex h-full w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant flex-col gap-base py-md z-50">
+<div class="px-margin mb-xl">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">ToolTrack Admin</h2>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-full mx-2 px-4 py-3 flex items-center gap-md transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-full mx-2 px-4 py-3 flex items-center gap-md transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<!-- Active State: Customer View -->
+<a class="bg-secondary-container text-on-secondary-container rounded-full mx-2 px-4 py-3 flex items-center gap-md transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-md text-label-md">Customers</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-full mx-2 px-4 py-3 flex items-center gap-md transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Sales</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest rounded-full mx-2 px-4 py-3 flex items-center gap-md transition-all active:scale-95 mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="mt-16 p-margin max-w-7xl mx-auto space-y-xl">
+<!-- Welcome Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<p class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-base">Operations Overview</p>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Admin Command Center</h2>
+</div>
+<div class="flex gap-sm">
+<button class="bg-surface-container-high border border-outline-variant px-md py-sm rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-body-lg">download</span>
+<span class="font-label-md">Export Report</span>
+</button>
+<button class="bg-primary text-on-primary px-md py-sm rounded-lg flex items-center gap-xs">
+<span class="material-symbols-outlined text-body-lg">add</span>
+<span class="font-label-md">New Entry</span>
+</button>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Categories Table (Span 4) -->
+<section class="md:col-span-4 bg-white technical-border rounded-xl flex flex-col overflow-hidden status-ready">
+<div class="p-md border-b border-outline-variant bg-surface-container-lowest flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg">Categories</h3>
+<span class="bg-secondary-container text-on-secondary-container text-xs font-bold px-2 py-0.5 rounded-full">Active</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-md py-sm font-label-md text-label-md text-on-surface-variant">Name</th>
+<th class="px-md py-sm font-label-md text-label-md text-on-surface-variant text-right">Items</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-md py-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">bolt</span>
+                                    Power Tools
+                                </td>
+<td class="px-md py-md text-right font-label-md">142</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-md py-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">straighten</span>
+                                    Measuring
+                                </td>
+<td class="px-md py-md text-right font-label-md">86</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-md py-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">safety_check</span>
+                                    Safety Gear
+                                </td>
+<td class="px-md py-md text-right font-label-md">310</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-md py-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">handyman</span>
+                                    Hand Tools
+                                </td>
+<td class="px-md py-md text-right font-label-md">512</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-sm mt-auto border-t border-outline-variant">
+<button class="w-full text-center py-sm text-primary font-medium hover:bg-surface-container-high rounded transition-colors">
+                        Manage All Categories
+                    </button>
+</div>
+</section>
+<!-- Customer List (Span 8) -->
+<section class="md:col-span-8 space-y-lg">
+<div class="bg-white technical-border rounded-xl p-md">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-lg">
+<h3 class="font-title-lg text-title-lg">Customer Directory</h3>
+<div class="relative w-full md:w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-low border border-outline rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Search customers..." type="text"/>
+</div>
+</div>
+<div class="space-y-sm">
+<!-- Customer Row -->
+<div class="flex items-center justify-between p-md border border-outline-variant rounded-lg hover:border-primary transition-all group">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">
+                                    AM
+                                </div>
+<div>
+<p class="font-medium text-on-surface">Arjun Mehta</p>
+<p class="text-xs text-on-surface-variant font-label-sm">arjun.mehta@nexusbuilt.com</p>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-xl">
+<div class="text-right">
+<p class="text-xs font-label-md text-outline uppercase">Tier</p>
+<p class="text-sm font-medium">Enterprise</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-label-md text-outline uppercase">Active Rentals</p>
+<p class="text-sm font-medium">12</p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Customer Row -->
+<div class="flex items-center justify-between p-md border border-outline-variant rounded-lg hover:border-primary transition-all">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">
+                                    SL
+                                </div>
+<div>
+<p class="font-medium text-on-surface">Sarah Lancaster</p>
+<p class="text-xs text-on-surface-variant font-label-sm">sarah.l@urbanrenovate.co</p>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-xl">
+<div class="text-right">
+<p class="text-xs font-label-md text-outline uppercase">Tier</p>
+<p class="text-sm font-medium">Standard</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-label-md text-outline uppercase">Active Rentals</p>
+<p class="text-sm font-medium">4</p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Customer Row -->
+<div class="flex items-center justify-between p-md border border-outline-variant rounded-lg hover:border-primary transition-all">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary font-bold">
+                                    DK
+                                </div>
+<div>
+<p class="font-medium text-on-surface">David Kim</p>
+<p class="text-xs text-on-surface-variant font-label-sm">dkim@freelancebuild.net</p>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-xl">
+<div class="text-right">
+<p class="text-xs font-label-md text-outline uppercase">Tier</p>
+<p class="text-sm font-medium">Basic</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-label-md text-outline uppercase">Active Rentals</p>
+<p class="text-sm font-medium">1</p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Sales/Transaction History (Span 12) -->
+<section class="md:col-span-12">
+<div class="bg-white technical-border rounded-xl overflow-hidden">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary">history</span>
+<h3 class="font-title-lg text-title-lg">Recent Transactions</h3>
+</div>
+<div class="flex gap-sm">
+<select class="text-xs font-label-md bg-surface border-outline rounded px-sm py-1">
+<option>Status: All</option>
+<option>Completed</option>
+<option>Pending</option>
+</select>
+</div>
+</div>
+<div class="overflow-x-auto hide-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest border-b border-outline-variant">
+<th class="px-margin py-md font-label-md text-on-surface-variant">Transaction ID</th>
+<th class="px-md py-md font-label-md text-on-surface-variant">Tool Details</th>
+<th class="px-md py-md font-label-md text-on-surface-variant">Customer</th>
+<th class="px-md py-md font-label-md text-on-surface-variant">Amount</th>
+<th class="px-md py-md font-label-md text-on-surface-variant">Status</th>
+<th class="px-margin py-md font-label-md text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-margin py-md font-label-md">#TRX-9482</td>
+<td class="px-md py-md">
+<div class="flex flex-col">
+<span class="font-medium">Dewalt Hammer Drill DCD996</span>
+<span class="text-xs text-on-surface-variant">SKU: DW-996-01</span>
+</div>
+</td>
+<td class="px-md py-md">Arjun Mehta</td>
+<td class="px-md py-md font-medium text-primary">$45.00</td>
+<td class="px-md py-md">
+<span class="inline-flex items-center gap-1 bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-xs font-bold uppercase tracking-tighter">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                            Completed
+                                        </span>
+</td>
+<td class="px-margin py-md text-right">
+<button class="text-primary hover:underline font-label-md text-xs">Details</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-margin py-md font-label-md">#TRX-9481</td>
+<td class="px-md py-md">
+<div class="flex flex-col">
+<span class="font-medium">Hilti TE-50 Rotary Hammer</span>
+<span class="text-xs text-on-surface-variant">SKU: HL-TE50-X</span>
+</div>
+</td>
+<td class="px-md py-md">Sarah Lancaster</td>
+<td class="px-md py-md font-medium text-primary">$120.00</td>
+<td class="px-md py-md">
+<span class="inline-flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed-variant px-2 py-0.5 rounded text-xs font-bold uppercase tracking-tighter">
+<span class="material-symbols-outlined text-[14px]">pending</span>
+                                            Pending
+                                        </span>
+</td>
+<td class="px-margin py-md text-right">
+<button class="text-primary hover:underline font-label-md text-xs">Details</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-margin py-md font-label-md">#TRX-9480</td>
+<td class="px-md py-md">
+<div class="flex flex-col">
+<span class="font-medium">Fluke 117 Electrician's Multimeter</span>
+<span class="text-xs text-on-surface-variant">SKU: FL-117-MM</span>
+</div>
+</td>
+<td class="px-md py-md">David Kim</td>
+<td class="px-md py-md font-medium text-primary">$25.00</td>
+<td class="px-md py-md">
+<span class="inline-flex items-center gap-1 bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded text-xs font-bold uppercase tracking-tighter">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                            Completed
+                                        </span>
+</td>
+<td class="px-margin py-md text-right">
+<button class="text-primary hover:underline font-label-md text-xs">Details</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant mt-2xl">
+<div class="flex flex-col md:flex-row justify-between items-center py-xl px-margin gap-md max-w-7xl mx-auto">
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 ToolTrack Systems. All rights reserved.</p>
+<div class="flex gap-lg">
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-body-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-body-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-body-md" href="#">Contact</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-body-md" href="#">Support</a>
+</div>
+</div>
+</footer>
+<!-- Bottom Navigation Bar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface border-t border-outline-variant shadow-sm flex justify-around items-center h-16 px-gutter">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">build</span>
+<span class="font-label-sm text-label-sm">Tools</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-3 py-1 transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person_search</span>
+<span class="font-label-sm text-label-sm">Users</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- Decorative Atmosphere script -->
+<script>
+        // Subtle micro-interaction for rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mousedown', () => {
+                row.classList.add('opacity-80');
+            });
+            row.addEventListener('mouseup', () => {
+                row.classList.remove('opacity-80');
+            });
+        });
+
+        // Search highlight logic
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

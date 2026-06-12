@@ -9,7 +9,7 @@ import Categorias from './pages/admin/Categorias';
 import Clientes from './pages/admin/Clientes';
 import Ventas from './pages/admin/Ventas';
 
-// Componente Guard corregido con React.ReactNode (Paso 2 de las instrucciones)
+
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const token = localStorage.getItem('token');
   return token ? <>{children}</> : <Navigate to="/login" replace />;
@@ -22,7 +22,7 @@ export default function App() {
         {/* Rutas Públicas */}
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        
+
         {/* Rutas Privadas del Panel de Administración */}
         <Route path="/admin" element={<PrivateRoute><AdminLayout /></PrivateRoute>}>
           <Route index element={<Dashboard />} />

@@ -11,6 +11,15 @@
 ### Descripción General
 El frontend de ToolTrack ha sido diseñado siguiendo especificaciones de UX/UI mediante Google Stitch, garantizando una interfaz intuitiva y responsive para usuarios en dispositivos móviles y de escritorio.
 
+### Prompts Utilizados en Google Stitch
+* **Para el diseño base:** "Actúa como un Diseñador UI/UX Senior y Desarrollador Frontend experto. Genera un prototipo web de alta fidelidad para un sistema de gestión de herramientas llamado ToolTrack. Usa colores profesionales Slate (#1E293B), gris claro para fondos y acentos limpios. Maqueta una Landing Page, un Login, un Dashboard con métricas y las vistas de administración."
+
+### Evidencias del Sistema Operativo (Capturas)
+* **Diseño exportado desde Stitch:** ![Stitch Screen](./stitch_tooltrack_management_system/screen.png)
+* **Dashboard Administrativo Real:** *(Aquí pegas la captura de tu localhost con las barras e ingresos)*
+* **Módulo de Inventario con CRUD Real:** *(Aquí pegas la captura donde se ve que ya registra tus productos)*
+* **Vistas de Categorías y Clientes:** *(Aquí pegas las capturas estáticas que vimos antes)*
+
 ### Componentes de Diseño
 - **Landing Page**: Página de bienvenida con información del proyecto y llamadas a acción
 - **Login Page**: Interfaz de autenticación segura con validación de credenciales
@@ -193,3 +202,40 @@ ToolTrack implementa una arquitectura moderna de tres capas:
 - **Infraestructura**: Docker Compose para orquestación
 
 El control de calidad se asegura mediante tipado estricto, ruteo protegido y build automatizado, mientras que Nginx y Docker Compose optimizan el despliegue en producción.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
