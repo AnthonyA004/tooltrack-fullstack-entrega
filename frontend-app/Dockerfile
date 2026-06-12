@@ -8,10 +8,10 @@ RUN apk add --no-cache libc6-compat
 # Forzamos NODE_ENV a development para que Coolify no ignore las devDependencies
 ENV NODE_ENV=development
 
-# Copiar archivos de dependencias
-COPY package*.json ./
+# Copiar SOLO package.json (Ignoramos package-lock.json para forzar resolución de binarios Linux como esbuild)
+COPY package.json ./
 
-# Instalar TODAS las dependencias de forma limpia
+# Instalar TODAS las dependencias de forma limpia generando un nuevo árbol
 RUN npm install
 
 # Copiar el resto del código
