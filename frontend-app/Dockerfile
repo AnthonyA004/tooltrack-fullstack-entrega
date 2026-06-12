@@ -1,25 +1,23 @@
 # --- Etapa de Compilación ---
-FROM node:18-alpine AS builder
+# Cambiamos de Alpine a Debian (node:20) para máxima compatibilidad con binarios en Linux (evita segfaults de esbuild)
+FROM node:20 AS builder
 WORKDIR /app
 
-# Algunos paquetes nativos (como esbuild de Vite) pueden necesitar libc6-compat en Alpine
-RUN apk add --no-cache libc6-compat
-
-# Forzamos NODE_ENV a development para que Coolify no ignore las devDependencies
+# Forzar desarrollo para que Coolify/Docker no ignore las devDependencies
 ENV NODE_ENV=development
 
-# Copiar SOLO package.json (Ignoramos package-lock.json para forzar resolución de binarios Linux como esbuild)
+# Copiar SOLO package.json (ignoramos el lock para descargar binarios nativos de Linux directamente)
 COPY package.json ./
 
-# Instalar TODAS las dependencias de forma limpia generando un nuevo árbol
+# Instalar TODAS las dependencias
 RUN npm install
 
 # Copiar el resto del código
 COPY . .
 
-# Volvemos a producción y compilamos
+# Volvemos a producción y compilamos (con un fallback para imprimir errores detallados)
 ENV NODE_ENV=production
-RUN npm run build
+RUN npm run build || (echo "VITE BUILD FALLO. Revisa los logs arriba." && exit 1)
 
 # --- Etapa de Producción ---
 FROM nginx:alpine
