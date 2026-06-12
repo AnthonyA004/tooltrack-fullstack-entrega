@@ -19,3 +19,4 @@ services:
     environment:
       - DB_PASSWORD=${DB_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
+      - PORT=5000
