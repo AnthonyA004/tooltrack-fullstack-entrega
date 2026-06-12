@@ -1,22 +1,22 @@
 # --- Etapa de Compilación ---
-FROM oven/bun:1.1-alpine AS builder
+FROM node:18-alpine AS builder
 WORKDIR /app
 
 # Copiar archivos de dependencias
-COPY package.json bun.lockb* package-lock.json* ./
-RUN bun install
+COPY package*.json ./
+
+# Instalar dependencias de Node de forma limpia
+RUN npm install
 
 # Copiar el resto del código y compilar la app de producción
 COPY . .
-RUN bun run build
+RUN npm run build
 
 # --- Etapa de Producción ---
 FROM nginx:alpine
-# Copiar los archivos estáticos compilados al directorio de Nginx
+# Copia el build de Vite hacia el directorio público de Nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copiar una configuración personalizada de Nginx para manejar el enrutamiento de React Router
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
+# Copiar configuración personalizada si existe, o usar la por defecto
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
