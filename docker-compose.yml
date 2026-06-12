@@ -15,8 +15,7 @@ services:
       context: ./herramientas-node-api
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "5000:3000"  # Mapea el puerto 5000 de Docker al puerto 3000 interno de Node
     environment:
       - DB_PASSWORD=${DB_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
-      - PORT=5000
