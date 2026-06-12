@@ -2,14 +2,23 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 
+# Algunos paquetes nativos (como esbuild de Vite) pueden necesitar libc6-compat en Alpine
+RUN apk add --no-cache libc6-compat
+
+# Forzamos NODE_ENV a development para que Coolify no ignore las devDependencies
+ENV NODE_ENV=development
+
 # Copiar archivos de dependencias
 COPY package*.json ./
 
-# Instalar dependencias de Node (asegurando devDependencies para vite)
-RUN npm install --include=dev
+# Instalar TODAS las dependencias de forma limpia
+RUN npm install
 
-# Copiar el resto del código y compilar la app de producción
+# Copiar el resto del código
 COPY . .
+
+# Volvemos a producción y compilamos
+ENV NODE_ENV=production
 RUN npm run build
 
 # --- Etapa de Producción ---
